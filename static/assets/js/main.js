@@ -15,6 +15,7 @@
         $nav = $('#nav');
 
     // Breakpoints.
+    /*
     breakpoints({
         wide: ['961px', '1880px'],
         normal: ['961px', '1620px'],
@@ -22,6 +23,8 @@
         narrower: ['737px', '960px'],
         mobile: [null, '736px']
     });
+
+    */
 
     // Play initial animations on page load.
     $window.on('load', function() {
@@ -98,8 +101,9 @@
 
         });
 
+
     //Start
-    $('#main_screen').hide();
+
     $('.streaming-start').click(function() {
         $('#main-screen').show();
     });
