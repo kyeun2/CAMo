@@ -98,6 +98,17 @@
 
         });
 
+    //Start
+    $('#main_screen').hide();
+    $('.streaming-start').click(function() {
+        $('#main-screen').show();
+    });
+
+    //Stop
+    $('.streaming-stop').click(function() {
+        $('#main-screen').hide();
+    });
+
     //Spinner
     $('#loading').hide();
     $('.okay').hide();
@@ -191,14 +202,6 @@
             visibleClass: 'header-visible'
         });
 
-    //Start
-    $('#main_screen').hide();
-    $('.start').click(function() {
-        $('#main_screen').show();
-    });
 
-    //Stop
-    $('.stop').click(function() {
-        $('#main_screen').hide();
-    });
+
 })(jQuery);
