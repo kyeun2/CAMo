@@ -9,8 +9,8 @@
 		<title>CAMo</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="shortcut icon" type="image/png" href="images/logo.png">
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+		<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/logo.png')}}">
         
 	</head>
 	
@@ -30,7 +30,7 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="#start"><span class="icon solid fas fa-play-circle"><h3>Start</h3></span></a></li>
+								<li><a href="#start" class="streaming-start"><span class="icon solid fas fa-play-circle"><h3>Start</h3></span></a></li>
 								<li><a href="#stop"><span class="icon solid fas fa-stop-circle"><h3>Stop</h3></span></a></li>
 							</ul>
 						</nav>
@@ -49,7 +49,7 @@
 						</div>
 
 						<section id="lists">
-							<script src="img-load.php"></script>
+							<script src="{{ url_for('static', filename='img-load.php')}}"></script>
 						</section>
 
 				</div>
@@ -68,7 +68,7 @@
 				<!-- 방송화면 -->
 					<section class="one dark cover">
 						<div class="container">
-							<img src="{{ url_for('streaming') }}"> 
+							<img id = "main_screen" src="{{ url_for('streaming') }}"> 
 						</div>
 					</section>
 				
@@ -87,7 +87,7 @@
 							</div>
 							<center>
 								<div class="screen">
-									<img src="./?action=stream" />
+									<img src="{{ url_for('streaming') }}" />
 								</div>
 								<div class="shutter">
 									<a href="#" class = "picture"><span class="icon solid fas fa-circle"></span></a>
@@ -116,16 +116,16 @@
 					</ul>
 
 			</div>
-
+{{ url_for('static', filename='')}}
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/browser.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+			<script src={{ url_for('static',filename='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')}}></script>
 			
 
 	</body>

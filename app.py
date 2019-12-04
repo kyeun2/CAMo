@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from flask import Flask, render_template, Response
-import picamera
+#import picamera
 import cv2
 import socket
 import io

@@ -111,6 +111,7 @@
         }, 3000);
     })
 
+
     // Delete
     var select = 0;
 
@@ -190,5 +191,14 @@
             visibleClass: 'header-visible'
         });
 
+    //Start
+    $('#main_screen').hide();
+    $('.start').click(function() {
+        $('#main_screen').show();
+    });
 
+    //Stop
+    $('.stop').click(function() {
+        $('#main_screen').hide();
+    });
 })(jQuery);

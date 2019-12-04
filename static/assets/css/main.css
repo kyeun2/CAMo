@@ -343,6 +343,7 @@ br.clear {
     margin: 0 auto;
     max-width: 100%;
     width: 1400px;
+    height: 35em;
 }
 
 
@@ -2128,10 +2129,6 @@ button:active,
 #main>section.one {
     background-color: #81918E;
     background-image: url("../../images/black.jpg");
-}
-
-.container {
-    height: 35em;
 }
 
 
