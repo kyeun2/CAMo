@@ -2665,3 +2665,7 @@ a.layer-exit:hover {
         -webkit-transform: rotate(360deg);
     }
 }
+
+#main-screen {
+    width: 1200px;
+}

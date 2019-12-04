@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from flask import Flask, render_template, Response
-#import picamera
+import picamera
 import cv2
 import socket
 import io
@@ -17,9 +17,9 @@ def gen():
     """Video streaming generator function."""
     while True:
         rval, frame = vc.read()
-        cv2.imwrite('t.jpg', frame)
+        cv2.imwrite('stream.jpg', frame)
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + open('t.jpg', 'rb').read() + b'\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + open('stream.jpg', 'rb').read() + b'\r\n')
 
 
 @app.route('/streaming')
