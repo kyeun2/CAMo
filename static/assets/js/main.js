@@ -13,7 +13,7 @@
     var $window = $(window),
         $body = $('body'),
         $nav = $('#nav');
-
+    var select = 0;
     // Breakpoints.
     /*
     breakpoints({
@@ -77,12 +77,12 @@
 
                     // Deactivate section.
                     $section.addClass('inactive');
-
                 },
                 enter: function() {
 
                     // Activate section.
                     $section.removeClass('inactive');
+
 
                     // No locked links? Deactivate all links and activate this section's one.
                     if ($nav_a.filter('.active-locked').length == 0) {
@@ -101,11 +101,40 @@
 
         });
 
+    // Delete
+
+    $('.delete').click(function() {
+
+        var check = confirm("정말 삭제하시겠습니까?");
+
+        if (check == true && select == 1) {
+            alert("삭제되었습니다.");
+        } else if (check == true && select == 0) {
+            alert("Error : 삭제할 목록을 선택하지 않았습니다.");
+        }
+
+        select = 0;
+
+    })
+
+
+
+    $('.list').click(function() {
+        select = 1;
+    })
+
+
 
     //Start
+    $('#main-screen').hide();
 
     $('.streaming-start').click(function() {
         $('#main-screen').show();
+    });
+
+    //Pause
+    $('.streaming-pause').click(function() {
+        $('#main-screen').hide();
     });
 
     //Stop
@@ -127,24 +156,6 @@
     })
 
 
-    // Delete
-    var select = 0;
-
-    $('.list').click(function() {
-        select = 1;
-    })
-    $('.delete').click(function() {
-        var check = confirm("정말 삭제하시겠습니까?");
-
-        if (check == true && select == 1) {
-            alert("삭제되었습니다.");
-        } else if (check == true && select == 0) {
-            alert("Error : 삭제할 목록을 선택하지 않았습니다.");
-        }
-
-        select = 0;
-
-    });
 
     //Add
 

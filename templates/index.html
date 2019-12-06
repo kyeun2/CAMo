@@ -31,6 +31,7 @@
 						<nav id="nav">
 							<ul>
 								<li><a href="#start" class="streaming-start"><span class="icon solid fas fa-play-circle"><h3>Start</h3></span></a></li>
+							    <li><a href="#pause" class="streaming-pause"><span class="icon solid fas fa-pause-circle"><h3>Pause</h3></span></a></li>
 							    <li><a href="#stop" class="streaming-stop"><span class="icon solid fas fa-stop-circle"><h3>Stop</h3></span></a></li>
                             </ul>
 						</nav>
@@ -41,7 +42,7 @@
 								<h2>Permission List</h2>
 								<div id="nav">
 								<a href="#" class = "add" data-id="camera-add"><span class="icon solid fas fa-user-plus"> <h3>Add</h3></span></a>
-								<a href="#" class = "delete"><span class="icon solid fas fa-user-minus"> <h3>Delete</h3></span></a>
+								<a href="#delete" class = "delete" data-id="img-delete"><span class="icon solid fas fa-user-minus"> <h3>Delete</h3></span></a>
 								</div>
 							</center>
 
@@ -52,7 +53,7 @@
                         
                         {% for image_name in image_names %}
                             <article>
-                                <a class="list" href="#">
+                                <a class="list" href="#{{image_name}}" data-id="{{image_name}}">
                                     <img src="{{url_for('static', filename='face-images/'+image_name )}}"/>
                                 </a>
                             </article>
@@ -74,9 +75,9 @@
 			<div id="main">
 
 				<!-- 방송화면 -->
-					<section class="one dark cover">
-						<div class="container">
-							<img id = "main-screen" src="{{ url_for('streaming') }}"> 
+					<section class="one dark cover">		
+						<div id = "main-screen">
+							<img src="{{ url_for('streaming') }}"> 
 						</div>
 					</section>
 				
