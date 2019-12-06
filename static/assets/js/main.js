@@ -7,13 +7,16 @@
 
 (function($) {
 
-
-
-
     var $window = $(window),
         $body = $('body'),
-        $nav = $('#nav');
-    var select = 0;
+        $nav = $('#nav'),
+        $lists = $('#lists'),
+        $select = 0,
+        $file = null;
+    var $status = null;
+
+    $('#main-screen').hide();
+
     // Breakpoints.
     /*
     breakpoints({
@@ -86,7 +89,6 @@
 
                     // No locked links? Deactivate all links and activate this section's one.
                     if ($nav_a.filter('.active-locked').length == 0) {
-
                         $nav_a.removeClass('active');
                         $this.addClass('active');
 
@@ -101,46 +103,159 @@
 
         });
 
+    //lists
+    var $lists_a = $lists.find('a');
+
+    $lists_a
+        .addClass('scrolly')
+        .on('click', function(e) {
+
+            var $this = $(this);
+
+            // External link? Bail.
+            if ($this.attr('href').charAt(0) != '#')
+                return;
+
+            // Prevent default.
+            e.preventDefault();
+
+            // Deactivate all links.
+            $lists_a.removeClass('active');
+
+            // Activate link *and* lock it (so Scrollex doesn't try to activate other links as we're scrolling to this one's section).
+            $this
+                .addClass('active')
+                .addClass('active-locked');
+
+        })
+        .each(function() {
+
+            var $this = $(this),
+                id = $this.attr('href'),
+                $section = $(id);
+
+            // No section for this link? Bail.
+            if ($section.length < 1)
+                return;
+
+            // Scrollex.
+            $section.scrollex({
+                mode: 'middle',
+                top: '-10vh',
+                bottom: '-10vh',
+                initialize: function() {
+
+                    // Deactivate section.
+                    $section.addClass('inactive');
+                },
+                enter: function() {
+
+                    // Activate section.
+                    $section.removeClass('inactive');
+
+
+                    // No locked links? Deactivate all links and activate this section's one.
+                    if ($lists_a.filter('.active-locked').length == 0) {
+
+                        $lists_a.removeClass('active');
+                        $this.addClass('active');
+
+                    }
+
+                    // Otherwise, if this section's link is the one that's locked, unlock it.
+                    else if ($this.hasClass('active-locked'))
+                        $this.removeClass('active-locked');
+
+                }
+            });
+
+        });
+
+
+    $('.list').click(function() {
+        $select = 1;
+        $file = $(this).data('id');
+    });
+
     // Delete
 
     $('.delete').click(function() {
 
-        var check = confirm("정말 삭제하시겠습니까?");
+        var $check = confirm('정말 삭제하시겠습니까?');
 
-        if (check == true && select == 1) {
-            alert("삭제되었습니다.");
-        } else if (check == true && select == 0) {
-            alert("Error : 삭제할 목록을 선택하지 않았습니다.");
+        if ($check == true && $select == 1) {
+
+            $.ajax({
+                url: '/filename',
+                type: 'POST',
+                data: { file_name: $file },
+                dataType: 'json'
+            });
+
+
+            alert($file + '가 삭제되었습니다.');
+
+
+        } else if ($check == true && $select == 0) {
+            alert('Error : 삭제할 목록을 선택하지 않았습니다.');
         }
 
-        select = 0;
-
-    })
-
+        $select = 0;
+        $file = null;
 
 
-    $('.list').click(function() {
-        select = 1;
-    })
+        //location.reload(); //새로고침 후 무조건 화면 hide 상태
 
+        //$('#header').load(window.location.href + '#header'); //새로고침 후 버튼 이벤트에 따라 화면이 바뀌지 않음
+
+        //$('#main').load(window.location.href + '#main'); //새로고침 후 클릭 이벤트 x, footer 겹치는 현상
+
+        //$('#img_list_form').load(window.location.href + '#img_list_form');//새로고침 후 버튼 이벤트에 따라 화면이 바뀌지 않음
+
+        /*
+        $('#header').load(window.location.href + '#header');
+        $('#main').load(window.location.href + '#main');
+
+        //스트리밍 화면 배치 이상해짐
+        */
+
+        $('#bd').load(window.location.href + '#bd'); //새로고침 후 무조건 화면 hide 상태
+
+        /*
+        if ($status == 'start') {
+            console.log("jjjjj");
+            $('#main-screen').show();
+        } else {
+            console.log("jjjjkkk");
+            $('#main-screen').hide();
+        }
+        */
+
+
+
+
+    });
 
 
     //Start
-    $('#main-screen').hide();
-
     $('.streaming-start').click(function() {
         $('#main-screen').show();
+        $status = $(this).data('id');
     });
 
     //Pause
     $('.streaming-pause').click(function() {
         $('#main-screen').hide();
+        $status = $(this).data('id');
     });
 
     //Stop
     $('.streaming-stop').click(function() {
         $('#main-screen').hide();
+        $status = $(this).data('id');
     });
+
+
 
     //Spinner
     $('#loading').hide();
@@ -153,19 +268,18 @@
             $('#loading').hide();
             $('.okay').show();
         }, 3000);
-    })
+    });
 
 
 
     //Add
-
     $('.add').click(function() {
         var $camera = $(this).data('id');
         layer_popup($camera);
     });
 
-    //camera
 
+    //camera
     function layer_popup(el) {
         $('#' + el).fadeIn();
         $('#' + el).find('a.layer-exit').click(function() {
@@ -197,11 +311,7 @@
     // Header (narrower + mobile).
 
     // Toggle.
-    $(
-            '<div id="headerToggle">' +
-            '<a href="#header" class="toggle"></a>' +
-            '</div>'
-        )
+    $('<div id="headerToggle">' + '<a href="#header" class="toggle"></a>' + '</div>')
         .appendTo($body);
 
     // Header.
