@@ -1862,7 +1862,7 @@
             position: fixed;
             text-align: right;
             top: 0;
-            width: 1500px;
+            width: 1200px;
             z-index: 2;
         }
         
@@ -2016,7 +2016,7 @@
         /* Footer */
         
         #footer {
-            margin-left: 1500px;
+            margin-left: 1200px;
             text-align: center;
             background-color: #dce3e2;
             padding: 3em 0 3em 0;
@@ -2046,7 +2046,7 @@
         /* Main */
         
         #main {
-            margin-left: 1500px;
+            margin-left: 1200px;
         }
         
         #main>section {
