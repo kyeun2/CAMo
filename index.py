@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 from flask import Flask, render_template, Response, redirect, url_for, request
-import picamera
+#import picamera
 import cv2
 import socket
 import io
 import os
+import shutil
 
 app = Flask(__name__)
 vc = cv2.VideoCapture(0)
@@ -46,6 +47,11 @@ def delete_target_image():
         for i in ilist:
             if filename[0] in i:
                 os.remove('static/face-images/'+ i)
+
+@app.route('/stop')
+def stop():
+    shutil.rmtree('static/face-images/')
+    os.makedirs('static/face-images/')
 
 """
 @app.route('/start')

@@ -249,8 +249,21 @@
         $status = $(this).data('id');
     });
 
+
     //Stop
     $('.streaming-stop').click(function() {
+        var $check = confirm('정말 종료하시겠습니까?');
+
+        if ($check == true) {
+
+            $.ajax({
+                url: '/stop'
+            });
+
+            alert('종료되었습니다.');
+        }
+
+        $('#lists').hide();
         $('#main-screen').hide();
         $status = $(this).data('id');
     });
