@@ -55,7 +55,7 @@
 								{% for image_name in image_names %}
 									<article>
 										<a class="list" href="#{{image_name}}" data-id="{{image_name}}">
-											<img src="{{url_for('static', filename='face-images/'+image_name )}}"/>
+											<img src="{{url_for('static', filename='train/'+image_name )}}"/>
 										</a>
 									</article>
 								{% endfor %}
@@ -78,7 +78,7 @@
 				<!-- 방송화면 -->
 					<section class="one dark cover">		
 						<div id = "main-screen">
-							<img src="{{ url_for('streaming') }}"> 
+							<img src="{{ url_for('cam_streaming') }}"> 
 						</div>
 					</section>
 				
@@ -97,7 +97,7 @@
 							</div>
 							<center>
 								<div class="screen">
-									<img id = "main-camera" src="{{ url_for('streaming') }}" />
+									<img id = "main-camera" src="{{ url_for('cam_streaming') }}" />
 								</div>
 								<div class="shutter">
 									<a href="#" class = "picture"><span class="icon solid fas fa-circle"></span></a>

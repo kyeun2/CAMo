@@ -261,11 +261,11 @@
             });
 
             alert('종료되었습니다.');
-        }
 
-        $('#lists').hide();
-        $('#main-screen').hide();
-        $status = $(this).data('id');
+            $('#lists').hide();
+            $('#main-screen').hide();
+            $status = $(this).data('id');
+        }
     });
 
 
@@ -276,11 +276,16 @@
 
     $('.shutter').click(function() {
         $('#loading').show();
+
+        $.ajax({
+            url: '/camera'
+        });
+
         setTimeout(() => {
             $('.shutter').hide();
             $('#loading').hide();
             $('.okay').show();
-        }, 3000);
+        }, 5000);
     });
 
 
