@@ -40,9 +40,10 @@ def gen():
     """Video streaming generator function."""
     while True:
         rval, frame = vc.read()
-        cv2.imwrite('stream.jpg', frame)
+        cv2.flip(frame, 1)
+        cv2.imwrite('cam.jpg', frame)
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + open('stream.jpg', 'rb').read() + b'\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + open('cam.jpg', 'rb').read() + b'\r\n')
 
 def gen2():
     """Video streaming generator function."""
@@ -103,19 +104,6 @@ def camera():
     stream_model.face_rec_crop()
     stream_model.preTreat(stream_model.PT)
 
-"""
-@app.route('/start')
-def start():
-    return render_template('index.html',s = 'start', image_names = image_load())
-
-@app.route('/pause')
-def pause():
-    return render_template('index.html',s = 'pause', image_names = image_load())
-
-@app.route('/stop')
-def stop():
-    return render_template('index.html',s = 'stop', image_names = image_load())
-"""
 
 
 if __name__ == '__main__':

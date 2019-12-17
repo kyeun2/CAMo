@@ -241,12 +241,14 @@
     $('.streaming-start').click(function() {
         $('#main-screen').show();
         $status = $(this).data('id');
+
     });
 
     //Pause
     $('.streaming-pause').click(function() {
         $('#main-screen').hide();
         $status = $(this).data('id');
+
     });
 
 
