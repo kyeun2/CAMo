@@ -1,12 +1,14 @@
 # camo_gui
 2019 보안프로젝트 - CAMO
 
+
+
 ## directory (주요 파일 설명)
 - static
     - assets, images : css, js, image 소스파일
     - facerec1, train : 사진 크롭 및 훈련 데이터 저장 폴더
 
-- templates : html(index.html : 메인페이지 / viewer.html : 시청자페이지)
+- templates : html(index.html : 메인페이지 / viewer.html : 시청자페이지 / index_plus.html : 개인정보수집 안내 내용 추가 ver, 오류존재 / upload.html : add를 실행하지 않고 start를 할 때, 사진을 업로드하는 화면, 오류존재)
 
 - setting : : flask - apache 연동 시 필요한 파일
 
