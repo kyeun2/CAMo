@@ -54,6 +54,11 @@ def index():
    return render_template('index.html',image_names = image_load())
 
 
+@app.route('/viewer')
+def viewer():
+   return render_template('viewer.html')
+
+
 def image_load():
     #permission list 이미지 로드
     image_names=[]
@@ -134,35 +139,35 @@ def gen():
     vgg_face_descriptor = Model(inputs=model.layers[0].input, outputs=model.layers[-2].output)
     model = vgg_face_descriptor
     print('model done')
+    
+    try:
+    #predict
+        ok_pictures = os.listdir('static/train/')
+            
+        for file in ok_pictures:
+            ok, extension = file.split(".")
+            
+            img = load_img("static/train/%s.jpg" % (ok), target_size=(224, 224))
+            img = img_to_array(img)
+            img = np.expand_dims(img, axis=0)
+            img = preprocess_input(img)
 
-#predict
-    ok_pictures = os.listdir('static/train/')
-        
-    for file in ok_pictures:
-        ok, extension = file.split(".")
-        
-        img = load_img("static/train/%s.jpg" % (ok), target_size=(224, 224))
-        img = img_to_array(img)
-        img = np.expand_dims(img, axis=0)
-        img = preprocess_input(img)
+            oks = dict()
+            oks[ok] = model.predict(img, steps=1)[0,:]
 
-        oks = dict()
-        oks[ok] = model.predict(img, steps=1)[0,:]
+        print('predict done')
 
-    print('predict done')
+    #livestream
+        color = (67, 67, 67)
+        rectangleColor = (0,165,255)
+        frameCounter = 0
+        currentFaceID = 0
 
-#livestream
-    color = (67, 67, 67)
-    rectangleColor = (0,165,255)
-    frameCounter = 0
-    currentFaceID = 0
+        detector = MTCNN()
+        video_capture = cv2.VideoCapture(0)
+        #cv2.startWindowThread()
 
-    detector = MTCNN()
-    video_capture = cv2.VideoCapture(0)
-    #cv2.startWindowThread()
-
-    while True:
-        try:
+        while True:
             _, baseImage = video_capture.read()
             baseImage = cv2.flip(baseImage, 1)
             
@@ -308,7 +313,8 @@ def gen():
             yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + open('result-image.jpg', 'rb').read() + b'\r\n')
               
-        except :
+    except:
+        while True:    
             _, frame = vc.read()
             frame = cv2.flip(frame, 1)
             cv2.imwrite('result-image.jpg', frame)
