@@ -6,39 +6,16 @@
 -->
 <html>
 	<head>
-		<title>CAMo</title>
+		<title>CAMo - Viewer</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
 		<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/logo.png')}}">
-			
         
 	</head>
 	
 	<body class="is-preload" id="bd">
 		
-		<!-- Header -->
-			<div id="header">
-
-				<div class="top">
-
-					<!-- Logo -->
-						<div id="logo">
-							<h1>CAMo</h1>
-							<p>Privacy Camera For Live Streaming Video</p>
-						</div>
-					
-					
-
-				</div>
-
-				<div class="bottom">
-					<p id = "desc"> Develop by IDLE</p>
-
-				</div>
-
-
-			</div>
 
 		<!-- Main -->
 			<div id="main">
@@ -56,32 +33,7 @@
 			
 			<!--팝업창 : 카메라 실행-->
 
-			<div id="camera-add" class="camera-layer">
-				<div class="layer-pop">
-					<div class="container-pop">
-						<div class="content-pop">
-							<div class="exit-btn">
-								<a href="#" class = "layer-exit"><span class="icon solid fas fa-times-circle"></span></a>
-							</div>
-							<center>
-								<div class="screen">
-									<img id = "main-camera" src="{{ url_for('cam_streaming') }}" />
-								</div>
-								<div class="shutter">
-									<a href="#" class = "picture"><span class="icon solid fas fa-circle"></span></a>
-								</div>
-								<div class="okay">
-									<a href="#" class = "ok"><span class="icon solid fas fa-check-circle"></span></a>
-								</div>
-							</center>
-
-							<div id="loading"></div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-  
+			
 
 
 
@@ -92,11 +44,9 @@
 					<ul class="copyright">
 						<p><li>&copy; CAMo. All rights reserved.</li><li>Design: HTML5 UP and YE</a></li></p>
 					</ul>
-					
-					
+
 			</div>
 		<!-- Scripts -->
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 			<script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
 			<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js')}}"></script>
 			<script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js')}}"></script>
