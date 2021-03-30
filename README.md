@@ -3,7 +3,7 @@
 
 
 
-## directory (주요 파일 설명)
+## source_code (주요 파일 설명)
 - static
     - assets, images : css, js, image 소스파일
     - facerec1, train : 사진 크롭 및 훈련 데이터 저장 폴더
