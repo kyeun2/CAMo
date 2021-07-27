@@ -1,4 +1,4 @@
-# camo_gui
+# CAMo
 2019 보안프로젝트 - CAMO
 
 
